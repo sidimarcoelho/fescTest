@@ -1,13 +1,9 @@
 package SubmitInfo;
 
-import Page.ProductPage;
-import Page.SubmitPage;
 import Setup.InitBrowser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -19,19 +15,16 @@ import static java.lang.Thread.sleep;
 
 
 public class SubmitInfoTest{
-    public static WebDriver driver;
+    private WebDriver driver;
 
     @BeforeMethod
     public void init() {
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        driver.manage().deleteAllCookies();
-        driver.get("https://docs.google.com/forms/d/e/1FAIpQLScQ7Ej_21M73p2Qf1SaRQt8LgUKGMmPcJt35K8odJKEXzCSMA/viewform?vc=0&c=0&w=1");
-        driver.manage().window().maximize();
+        driver = InitBrowser.initBrowser();
     }
 
     @Test(priority = 1)
     public void fieldFileStandard() throws Exception {
+        sleep(500);
         driver.findElement(By.name("entry.1643251653")).clear();
         sleep(300);
         driver.findElement(By.name("entry.1643251653")).sendKeys("Sidimar Garcia Coelho");
@@ -51,7 +44,7 @@ public class SubmitInfoTest{
 
     @AfterMethod
     public void close() throws Exception {
-        //driver.close();
+        driver.close();
     }
 
 }
